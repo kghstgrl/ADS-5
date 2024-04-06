@@ -88,8 +88,7 @@ int eval(std::string pref) {
             default:
                 continue;
             }
-        }
-        else {
+        } else {
             continue;
         }
     }
