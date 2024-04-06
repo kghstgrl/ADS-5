@@ -4,7 +4,8 @@
 #include "tstack.h"
 
 bool isOperator(char op) {
-    return (op == '+' || op == '-' || op == '(' || op == ')' || op == '/' || op == '*');
+    return (op == '+' || op == '-' || op == '(' ||
+        op == ')' || op == '/' || op == '*');
 }
 bool isDigit(char n) {
     return (n >= '0' && n <= '9');
@@ -30,25 +31,20 @@ std::string infx2pstfx(std::string inf) {
                 continue;
             }
             post = post + ' ' + s;
-        }
-        else if (isOperator(s)) {
+        } else if (isOperator(s)) {
             if (s == '(') {
                 stack1.push(s);
-            }
-            else if (stack1.checkEmpty()) {
+            } else if (stack1.checkEmpty()) {
                 stack1.push(s);
-            }
-            else if (whatPrioritet(s) > whatPrioritet(stack1.get())) {
+            } else if (whatPrioritet(s) > whatPrioritet(stack1.get())) {
                 stack1.push(s);
-            }
-            else if (s == ')') {
+            } else if (s == ')') {
                 while (stack1.get() != '(') {
                     post = post + ' ' + stack1.get();
                     stack1.pop();
                 }
                 stack1.pop();
-            }
-            else {
+            } else {
                 int x = whatPrioritet(s);
                 int y = whatPrioritet(stack1.get());
                 while (!stack1.checkEmpty() && x <= y) {
@@ -71,8 +67,7 @@ int eval(std::string pref) {
     for (char s : pref) {
         if (isDigit(s)) {
             stack2.push(s - '0');
-        }
-        else if (isOperator(s)) {
+        } else if (isOperator(s)) {
             int x = stack2.get();
             stack2.pop();
             int y = stack2.get();
